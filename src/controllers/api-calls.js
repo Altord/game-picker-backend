@@ -5,10 +5,12 @@ const apiRouter = express.Router()
 
 
 const today = new Date()
+const date1 = (new Date().setDate(today.getDate()))/1000
 const date60 = (new Date().setDate(today.getDate()-60))/1000
 const date14 = (new Date().setDate(today.getDate()-14))/1000
 const roundedDate60 = Math.round(date60)
 const roundedDate14 = Math.round(date14)
+const roundedDate1 = Math.round(date1)
 
 //Basic Search function
 apiRouter.post('/api-router-search', (req,res) =>{
@@ -26,7 +28,7 @@ apiRouter.post('/api-router-search', (req,res) =>{
     },[])
         .then(response => {
             res.send(response.data)
-            console.log(response.data)
+           // console.log(response.data)
         })
 
         .catch(err => {
@@ -77,7 +79,7 @@ apiRouter.post('/api-router-trending', (req,res) =>{
     })
         .then(response => {
             res.send(response.data)
-            console.log(response.data)
+           // console.log(response.data)
         })
 
         .catch(err => {
@@ -89,7 +91,7 @@ apiRouter.post('/api-router-trending', (req,res) =>{
 apiRouter.post('/api-router-soon', (req,res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     axios({
-        url: "https://api.igdb.com/v4/games",
+        url: "https://api.igdb.com/v4/release_dates",
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -97,17 +99,27 @@ apiRouter.post('/api-router-soon', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*; where release_dates.date > ${roundedDate14}; limit: 7; sort hypes asc;`
+        data: `fields game.cover.*,game.*; where date <= ${roundedDate1} & human != "TBD"; limit 16; sort date desc;`
     })
         .then(response => {
-            res.send(response.data)
-            console.log(response.data)
+            const uniqueNames = new Set();
+            const uniqueGames = response.data.filter(entry => {
+                const {name} = entry.game;
+                if (uniqueNames.has(name)) {
+                    return false;
+                }
+                uniqueNames.add(name);
+                return true;
+            })
+
+
+            res.send(uniqueGames)
+
         })
 
         .catch(err => {
             console.error(err);
         });
-
 })
 
 apiRouter.post('/api-router-anticipated', (req,res) =>{
@@ -121,11 +133,11 @@ apiRouter.post('/api-router-anticipated', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,status,release_dates.*; where release_dates.date >= ${roundedDate14}; sort follows asc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,status,release_dates.*; where release_dates.date >= ${roundedDate14};`
     })
         .then(response => {
             res.send(response.data)
-            console.log(response.data)
+            //console.log(response.data)
         })
 
         .catch(err => {
@@ -133,6 +145,36 @@ apiRouter.post('/api-router-anticipated', (req,res) =>{
         });
 
 })
+
+
+apiRouter.get('/test', (req,res) =>{
+    res.header("Access-Control-Allow-Origin", "*");
+    axios({
+        url: "https://api.igdb.com/v4/games",
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Client-ID': config.IDGB.CD ,
+            'Authorization': `Bearer ${config.IDGB.AT}`,
+
+        },
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,status,release_dates.*; where release_dates.date >= ${roundedDate14};`
+    })
+        .then(response => {
+            res.send(response.data)
+            //console.log(response.data)
+        })
+
+        .catch(err => {
+            console.error(err);
+        });
+})
+
+
+
+
+
+
 
 
 
