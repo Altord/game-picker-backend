@@ -49,7 +49,7 @@ apiRouter.post('/api-router-popularity', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*; where first_release_date > ${roundedDate60} & rating>= 70 & aggregated_rating >=80 & hypes >= 1 ; limit: 7; sort aggregated_rating asc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*; where first_release_date > ${roundedDate60} & rating>= 70 & aggregated_rating >=80 & hypes >= 1 ; limit: 10; sort aggregated_rating asc;`
     })
         .then(response => {
             res.send(response.data)
@@ -75,7 +75,7 @@ apiRouter.post('/api-router-trending', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*; where release_dates.date > ${roundedDate14}; limit: 7; sort hypes asc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*; where release_dates.date > ${roundedDate14}; limit: 10; sort hypes asc;`
     })
         .then(response => {
             res.send(response.data)
@@ -133,7 +133,7 @@ apiRouter.post('/api-router-anticipated', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,status,release_dates.*; where release_dates.date >= ${roundedDate14};`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,status,release_dates.*; limit 10; where release_dates.date >= ${roundedDate14};`
     })
         .then(response => {
             res.send(response.data)
@@ -158,7 +158,7 @@ apiRouter.get('/test', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,status,release_dates.*; where release_dates.date >= ${roundedDate14};`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,status,release_dates.*; limit 10; where release_dates.date >= ${roundedDate14};`
     })
         .then(response => {
             res.send(response.data)
