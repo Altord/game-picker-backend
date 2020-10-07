@@ -15,9 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.20.0",
+    "canvas": "^2.6.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "fast-average-color": "^6.1.0",
     "mongoose": "^5.10.7"
   },
   "devDependencies": {
