@@ -95,7 +95,7 @@ apiRouter.post('/api-router-popularity', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,platforms.*; where first_release_date > ${roundedDate60} & rating>= 70 & aggregated_rating >=80 & hypes >= 1 ; limit: 10; sort hypes desc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate60} & rating>= 70 & aggregated_rating >=80 & hypes >= 1 ; limit: 10; sort hypes desc;`
     })
         .then(response =>{
             const dataResponse = response.data
@@ -132,11 +132,23 @@ apiRouter.post('/api-router-trending', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*; where release_dates.date > ${roundedDate14}; limit: 10; sort hypes asc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where release_dates.date > ${roundedDate14}; limit: 10; sort hypes asc;`
     })
-        .then(response => {
-            res.send(response.data)
-            // console.log(response.data)
+        .then(response =>{
+            const dataResponse = response.data
+            const colorResponse =
+                Promise.all(
+                    Array.from({ length: 7 }, (_, idx) =>
+                        printAverageColor(response.data[idx].cover.url.replace("//", "https://")
+                        )));
+
+
+            return Promise.all([dataResponse,colorResponse])
+
+
+        })
+        .then(color=>{
+            res.send(color)
         })
 
         .catch(err => {
@@ -156,7 +168,7 @@ apiRouter.post('/api-router-soon', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields game.cover.*,game.*; where date <= ${roundedDate1} & human != "TBD"; limit 30; sort date desc;`
+        data: `fields game.cover.*,game.*, game.platforms.*, game.genres.*; where date <= ${roundedDate1} & human != "TBD"; limit 30; sort date desc;`
     })
         .then(response => {
             const uniqueNames = new Set();
@@ -170,8 +182,24 @@ apiRouter.post('/api-router-soon', (req,res) =>{
             })
 
 
-            res.send(uniqueGames)
+            return(uniqueGames)
 
+        })
+        .then(response =>{
+            const dataResponse = response
+            const colorResponse =
+                Promise.all(
+                    Array.from({ length: 7 }, (_, idx) =>
+                        printAverageColor(response[idx].game.cover.url.replace("//", "https://")
+                        )));
+
+
+            return Promise.all([dataResponse,colorResponse])
+
+
+        })
+        .then(finalRes=>{
+            res.send(finalRes)
         })
 
         .catch(err => {
@@ -190,11 +218,24 @@ apiRouter.post('/api-router-anticipated', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,status,release_dates.*,follows; limit 10; sort follows desc; where (follows != null & first_release_date > ${roundedDate1} );`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*,follows; limit 10; sort follows desc; where (follows != null & first_release_date > ${roundedDate1} );`
     })
-        .then(response => {
-            res.send(response.data)
-            //console.log(response.data)
+
+        .then(response =>{
+            const dataResponse = response.data
+            const colorResponse =
+                Promise.all(
+                    Array.from({ length: 7 }, (_, idx) =>
+                        printAverageColor(response.data[idx].cover.url.replace("//", "https://")
+                        )));
+
+
+            return Promise.all([dataResponse,colorResponse])
+
+
+        })
+        .then(color=>{
+            res.send(color)
         })
 
         .catch(err => {
@@ -207,7 +248,7 @@ apiRouter.post('/api-router-anticipated', (req,res) =>{
 apiRouter.get('/test', (req,res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     axios({
-        url: "https://api.igdb.com/v4/games",
+        url: "https://api.igdb.com/v4/release_dates",
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -215,76 +256,44 @@ apiRouter.get('/test', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,platforms.*; where first_release_date > ${roundedDate60} & rating>= 70 & aggregated_rating >=80 & hypes >= 1 ; limit: 10; sort hypes desc;`
+        data: `fields game.cover.*,game.*, game.platforms.*, game.genres.*; where date <= ${roundedDate1} & human != "TBD"; limit 30; sort date desc;`
     })
-        /*.then(response=>{
-            let array=[]
-            array.push(response.data)
-            return array
-        })*/
+        .then(response => {
+            const uniqueNames = new Set();
+            const uniqueGames = response.data.filter(entry => {
+                const {name} = entry.game;
+                if (uniqueNames.has(name)) {
+                    return false;
+                }
+                uniqueNames.add(name);
+                return true;
+            })
+
+
+            return(uniqueGames)
+
+        })
         .then(response =>{
-            const dataResponse = response.data
+            const dataResponse = response
             const colorResponse =
                 Promise.all(
-                Array.from({ length: 7 }, (_, idx) =>
-                    printAverageColor(response.data[idx].cover.url.replace("//", "https://")
-                    )));
+                    Array.from({ length: 7 }, (_, idx) =>
+                        printAverageColor(response[idx].game.cover.url.replace("//", "https://")
+                        )));
 
 
-           return Promise.all([dataResponse,colorResponse])
+            return Promise.all([dataResponse,colorResponse])
 
 
         })
-        .then(color=>{
-            res.send(color)
+        .then(finalRes=>{
+            res.send(finalRes)
         })
-
 
         .catch(err => {
             console.error(err);
         });
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Auth is currently retrieved and only temporarily saved when I'm on the twitch - auth page
-//I'll leave this for now but I might just use MONGODB to save the auth token and then return it later
-/*apiRouter.get('/twitch-auth', (req, res, next) => {
-    res.send('hello')
-    axios.request({
-        url: `https://id.twitch.tv/oauth2/token?client_id=${config.IDGB.CD}&client_secret=${config.IDGB.CS}&grant_type=client_credentials`,
-        method: "post",
-    })
-        .then((response)=>
-        {authToken = response.data
-        return authToken.access_data})
-        .catch(error => (console.log(error)) )
-    console.log(authToken)
-});
-*/
-
-
+console.log("hi")
 module.exports = apiRouter
