@@ -2,8 +2,8 @@ const config = require('../utils/config')
 const express = require('express')
 const axios = require('axios')
 const apiRouter = express.Router()
-const { createCanvas, loadImage } = require('canvas');
-const FastAverageColor = require('fast-average-color');
+const printAverageColor = require("../utils/average-color").printAverageColor;
+const googleTrends = require('google-trends-api')
 
 const today = new Date()
 const date1 = (new Date().setDate(today.getDate()))/1000
@@ -12,38 +12,20 @@ const date14 = (new Date().setDate(today.getDate()-14))/1000
 const roundedDate60 = Math.round(date60)
 const roundedDate14 = Math.round(date14)
 const roundedDate1 = Math.round(date1)
+console.log((new Date().setDate(today.getDate()-14)))
 
-const fac = new FastAverageColor();
+//Google trends
+async function trends (keyword){
+     await googleTrends.interestOverTime({keyword: `${keyword}`})
+        .then((results)=>{
+            JSON.parse(results)
 
-//General insert function
-
-Array.prototype.insert = function ( index, item ) {
-    this.splice( index, 0, item );
-};
-
-//color function
-async function printAverageColor(filename) {
-    const img = await loadImage(filename);
-    const { width, height } = img;
-
-    const canvas =  createCanvas(width, height);
-    const ctx =  canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-
-    const imageData =  ctx.getImageData(0, 0, width, height);
-
-    let imageColorArray= [
-        {SAC:   fac.getColorFromArray4(imageData.data,  { algorithm: 'simple'}) },
-        {SQAC:   fac.getColorFromArray4(imageData.data) },
-        {DAC:  fac.getColorFromArray4(imageData.data, { algorithm: 'dominant'})}
-    ]
-
-    // console.log(`Filename: ${filename}, size: ${width}×${height}`);
-    //console.log('// [red, green, blue, opacity]');
-    //console.log(imageColorArray)
-    return imageColorArray
-
+        })
+        .catch(function(err){
+            console.error('Oh no there was an error', err);
+        })
 }
+
 
 
 //Basic Search function
@@ -132,7 +114,7 @@ apiRouter.post('/api-router-trending', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where release_dates.date > ${roundedDate14}; limit: 10; sort hypes asc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate14}; limit: 50;`
     })
         .then(response =>{
             const dataResponse = response.data
@@ -156,7 +138,7 @@ apiRouter.post('/api-router-trending', (req,res) =>{
         });
 
 })
-
+//Search for upcomming games
 apiRouter.post('/api-router-soon', (req,res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     axios({
@@ -206,7 +188,7 @@ apiRouter.post('/api-router-soon', (req,res) =>{
             console.error(err);
         });
 })
-
+//Search for most anticipated games
 apiRouter.post('/api-router-anticipated', (req,res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     axios({
@@ -248,7 +230,7 @@ apiRouter.post('/api-router-anticipated', (req,res) =>{
 apiRouter.get('/test', (req,res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     axios({
-        url: "https://api.igdb.com/v4/release_dates",
+        url: "https://api.igdb.com/v4/games",
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -256,33 +238,27 @@ apiRouter.get('/test', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields game.cover.*,game.*, game.platforms.*, game.genres.*; where date <= ${roundedDate1} & human != "TBD"; limit 30; sort date desc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate14}; limit: 7;`
     })
-        .then(response => {
-            const uniqueNames = new Set();
-            const uniqueGames = response.data.filter(entry => {
-                const {name} = entry.game;
-                if (uniqueNames.has(name)) {
-                    return false;
-                }
-                uniqueNames.add(name);
-                return true;
-            })
-
-
-            return(uniqueGames)
-
-        })
         .then(response =>{
-            const dataResponse = response
-            const colorResponse =
-                Promise.all(
-                    Array.from({ length: 7 }, (_, idx) =>
+           /* const colorResponse =
+                Promise.all(Array.from({ length: 7 }, (_, idx) =>
                         printAverageColor(response[idx].game.cover.url.replace("//", "https://")
-                        )));
+                ))); */
+             const trendResponse =
+                Promise.all(Array.from({ length: 7 }, (_, idx) => (
+                    googleTrends.interestOverTime({keyword: `${response.data[idx].name}`, startTime: (new Date(+new Date - 12096e5))})
+                    .then((results)=>{
+                        return JSON.parse(results)
+                    })
+                    .catch(function(err){
+                        console.error('Oh no there was an error', err);
+                    }))))
+
+                /*Array.from({ length: 100 }, (_, idx) => */
 
 
-            return Promise.all([dataResponse,colorResponse])
+            return Promise.all([response.data, trendResponse])
 
 
         })
@@ -294,6 +270,11 @@ apiRouter.get('/test', (req,res) =>{
             console.error(err);
         });
 })
+
+
+
+
+
 
 console.log("hi")
 module.exports = apiRouter
