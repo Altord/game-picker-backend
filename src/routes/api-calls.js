@@ -271,6 +271,40 @@ apiRouter.get('/test', (req,res) =>{
         });
 })
 
+apiRouter.post('/api-router-top100', (req,res) =>{
+    res.header("Access-Control-Allow-Origin", "*");
+    axios({
+        url: "https://api.igdb.com/v4/games",
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Client-ID': config.IDGB.CD ,
+            'Authorization': `Bearer ${config.IDGB.AT}`,
+
+        },
+        data: `fields name,hypes,aggregated_rating,rating,genres.*,cover.*,collection,summary,platforms.*; where (rating > 80 & aggregated_rating < 99) & follows > 100; limit 10; sort aggregated_rating desc;`
+    })
+        .then(response =>{
+            const dataResponse = response.data
+            const colorResponse =
+                Promise.all(
+                    Array.from({ length: 10 }, (_, idx) =>
+                        printAverageColor(response.data[idx].cover.url.replace("//", "https://")
+                        )));
+
+            return Promise.all([dataResponse,colorResponse])
+
+
+        })
+        .then(color=>{
+            res.send(color)
+        })
+
+        .catch(err => {
+            console.error(err);
+        });
+
+})
 
 
 
