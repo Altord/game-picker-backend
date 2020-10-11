@@ -282,7 +282,7 @@ apiRouter.post('/api-router-top100', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,rating,genres.*,cover.*,collection,summary,platforms.*; where (rating > 80 & aggregated_rating < 99) & follows > 100; limit 10; sort aggregated_rating desc;`
+        data: `fields name,hypes,aggregated_rating,rating,genres.*,cover.*,collection,summary,platforms.*,first_release_date; where (rating > 80 & aggregated_rating < 99) & follows > 100; limit 10; sort aggregated_rating desc;`
     })
         .then(response =>{
             const dataResponse = response.data
