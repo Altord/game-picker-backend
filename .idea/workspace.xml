@@ -73,6 +73,7 @@
       <workItem from="1602195031545" duration="11927000" />
       <workItem from="1602271096230" duration="6663000" />
       <workItem from="1602349407198" duration="2074000" />
+      <workItem from="1602420560647" duration="4628000" />
     </task>
     <servers />
   </component>
@@ -96,10 +97,14 @@
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
     <state x="2400" y="488" key="FileChooserDialogImpl/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602178502675" />
-    <state x="2216" y="356" key="run.anything.popup" timestamp="1602212940975">
+    <state x="1992" y="367" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602442372465">
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
-    <state x="2216" y="356" key="run.anything.popup/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602212940975" />
+    <state x="1992" y="367" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602442372465" />
+    <state x="2216" y="356" key="run.anything.popup" timestamp="1602432857309">
+      <screen x="0" y="0" width="3840" height="2160" />
+    </state>
+    <state x="2216" y="356" key="run.anything.popup/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602432857309" />
     <state x="2283" y="355" width="672" height="678" key="search.everywhere.popup" timestamp="1602180983689">
       <screen x="0" y="0" width="3840" height="2160" />
     </state>

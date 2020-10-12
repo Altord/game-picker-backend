@@ -9,7 +9,9 @@ const today = new Date()
 const date1 = (new Date().setDate(today.getDate()))/1000
 const date60 = (new Date().setDate(today.getDate()-60))/1000
 const date14 = (new Date().setDate(today.getDate()-14))/1000
+const date25 = (new Date().setDate(today.getDate()-25))/1000
 const roundedDate60 = Math.round(date60)
+const roundedDate25 = Math.round(date25)
 const roundedDate14 = Math.round(date14)
 const roundedDate1 = Math.round(date1)
 console.log((new Date().setDate(today.getDate()-14)))
@@ -77,7 +79,7 @@ apiRouter.post('/api-router-popularity', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate60} & rating>= 70 & aggregated_rating >=80 & hypes >= 1 ; limit: 10; sort hypes desc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate25} & aggregated_rating >=70 & follows>5; limit: 10; sort hypes desc;`
     })
         .then(response =>{
             const dataResponse = response.data
