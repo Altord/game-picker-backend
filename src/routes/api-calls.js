@@ -79,7 +79,7 @@ apiRouter.post('/api-router-popularity', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate25} & aggregated_rating >=70 & follows>5; limit: 10; sort hypes desc;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate60} & aggregated_rating >=70 & follows>5; limit: 10; sort hypes desc;`
     })
         .then(response =>{
             const dataResponse = response.data
