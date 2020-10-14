@@ -47,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../fullstack-open/exercises" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -74,7 +74,8 @@
       <workItem from="1602271096230" duration="6663000" />
       <workItem from="1602349407198" duration="2074000" />
       <workItem from="1602420560647" duration="4628000" />
-      <workItem from="1602521518379" duration="6700000" />
+      <workItem from="1602521518379" duration="6889000" />
+      <workItem from="1602629195381" duration="3249000" />
     </task>
     <servers />
   </component>
