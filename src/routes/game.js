@@ -18,7 +18,7 @@ gameRouter.post(`/games/id`, (req,res,next) => {
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields age_ratings.*,artworks.url,summary,first_release_date,total_rating,name,aggregated_rating,involved_companies.publisher,involved_companies.developer,involved_companies.company.*,storyline,themes.name,total_rating,videos.video_id, screenshots.*, franchises.name,artworks.*,platforms.*,genres.*,cover.*; where id = ${req.body.gameId};`
+        data: `fields age_ratings.*,artworks.url,summary,first_release_date,total_rating,name,aggregated_rating,involved_companies.publisher,involved_companies.developer,involved_companies.company.*,storyline,themes.name,total_rating,videos.video_id,websites.*, screenshots.*, franchises.name,artworks.*,platforms.*,genres.*,cover.*; where id = ${req.body.gameId};`
     },[])
         .then(response =>{
             const dataResponse = response.data
@@ -55,7 +55,7 @@ gameRouter.get(`/games/id`, (req,res,next) => {
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields *,age_ratings,artworks.url,involved_companies.*,storyline,themes.name,total_rating,videos.video_id, screenshots.*, franchise.name,artworks.*,platforms.*,genres.*,cover.*; where id = 1077;`
+        data: `fields *,age_ratings,websites.*,artworks.url,involved_companies.*,storyline,themes.name,total_rating,videos.video_id, screenshots.*, franchise.name,artworks.*,platforms.*,genres.*,cover.*; where id = 24863;`
     },[])
         .then(response =>{
             const dataResponse = response.data
