@@ -7,8 +7,6 @@ const printAverageColor = require("../utils/average-color").printAverageColor;
 
 gameRouter.post(`/games/id`, (req,res,next) => {
     res.header("Access-Control-Allow-Origin", "*")
-    console.log(req.body)
-    console.log(req.body.gameId)
     axios({
         url: "https://api.igdb.com/v4/games/",
         method: 'POST',
@@ -42,11 +40,16 @@ gameRouter.post(`/games/id`, (req,res,next) => {
         });
 })
 
-gameRouter.get(`/games/id`, (req,res,next) => {
+
+gameRouter.post(`/games/rec`, (req,res,next) => {
     res.header("Access-Control-Allow-Origin", "*")
-    console.log(req.body)
-    console.log(req.body.gameId)
-    axios({
+    console.log(req.body.gameName)
+    let mappedGenre = req.body.genres.map(genre=>genre.id)
+    let mappedTheme = req.body.themes.map(theme=>theme.id)
+    let finalGenre = mappedGenre[Math.floor(Math.random() * mappedGenre.length)]
+    let finalTheme = mappedTheme[Math.floor(Math.random() * mappedTheme.length)]
+    console.log(finalGenre, finalTheme)
+        axios({
         url: "https://api.igdb.com/v4/games/",
         method: 'POST',
         headers: {
@@ -55,18 +58,11 @@ gameRouter.get(`/games/id`, (req,res,next) => {
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields *,age_ratings,websites.*,artworks.url,involved_companies.*,storyline,themes.name,total_rating,videos.video_id, screenshots.*, franchise.name,artworks.*,platforms.*,genres.*,cover.*; where id = 24863;`
+        data: `fields age_ratings.*,artworks.url,summary,first_release_date,total_rating,name,aggregated_rating,involved_companies.publisher,involved_companies.developer,involved_companies.company.*,storyline,themes.name,total_rating,videos.video_id,websites.*, screenshots.*, franchises.name,artworks.*,platforms.*,genres.*,cover.*; where themes =(${finalTheme}) & genres = (${finalGenre}) & category !=(1,2,4,5,6,7) & id !=(${req.body.gameName}); limit 20;`
     },[])
         .then(response =>{
             const dataResponse = response.data
-            const colorResponse =
-                Promise.all(
-                    Array.from({length: 1}, (_, idx) =>
-                        printAverageColor(response.data[idx].cover.url.replace("//", "https://")
-                        )));
-
-
-            return Promise.all([dataResponse,colorResponse])
+            return Promise.all([dataResponse])
 
 
         })

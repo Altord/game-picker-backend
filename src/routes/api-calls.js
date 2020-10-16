@@ -116,7 +116,7 @@ apiRouter.post('/api-router-trending', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate14}; limit: 50;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate14}; limit: 20;`
     })
         .then(response =>{
             const dataResponse = response.data
