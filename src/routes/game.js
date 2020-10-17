@@ -43,11 +43,11 @@ gameRouter.post(`/games/id`, (req,res,next) => {
 
 gameRouter.post(`/games/rec`, (req,res,next) => {
     res.header("Access-Control-Allow-Origin", "*")
-    console.log(req.body.gameName)
     let mappedGenre = req.body.genres.map(genre=>genre.id)
-    let mappedTheme = req.body.themes.map(theme=>theme.id)
+    let mappedTheme = (req.body.themes === undefined ? 0 : req.body.themes.map(theme=>theme.id))
     let finalGenre = mappedGenre[Math.floor(Math.random() * mappedGenre.length)]
     let finalTheme = mappedTheme[Math.floor(Math.random() * mappedTheme.length)]
+    let finalDec = req.body.themes === undefined ? `genres = (${finalGenre})`  : `themes =(${finalTheme}) & genres = (${finalGenre})`
     console.log(finalGenre, finalTheme)
         axios({
         url: "https://api.igdb.com/v4/games/",
@@ -58,7 +58,8 @@ gameRouter.post(`/games/rec`, (req,res,next) => {
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields age_ratings.*,artworks.url,summary,first_release_date,total_rating,name,aggregated_rating,involved_companies.publisher,involved_companies.developer,involved_companies.company.*,storyline,themes.name,total_rating,videos.video_id,websites.*, screenshots.*, franchises.name,artworks.*,platforms.*,genres.*,cover.*; where themes =(${finalTheme}) & genres = (${finalGenre}) & category !=(1,2,4,5,6,7) & id !=(${req.body.gameName}); limit 20;`
+
+        data: `fields age_ratings.*,artworks.url,summary,first_release_date,total_rating,name,aggregated_rating,involved_companies.publisher,involved_companies.developer,involved_companies.company.*,storyline,themes.name,total_rating,videos.video_id,websites.*, screenshots.*, franchises.name,artworks.*,platforms.*,genres.*,cover.*; where ${finalDec} & category !=(1,2,4,5,6,7) & id !=(${req.body.gameName}); limit 20;`
     },[])
         .then(response =>{
             const dataResponse = response.data
