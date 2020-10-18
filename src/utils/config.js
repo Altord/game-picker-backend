@@ -9,8 +9,13 @@ let IDGB = {
     AT: process.env.AUTH
 }
 
+let GS = {
+    GSKEY: process.env.GSID
+}
+
 module.exports = {
     PORT,
-    IDGB
+    IDGB,
+    GS
 }
 

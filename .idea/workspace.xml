@@ -54,6 +54,9 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Josh\Documents\Work\Projects\unfinished\gamepicker-backend\src\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Josh\Documents\Work\Projects\unfinished\gamepicker-backend\src\routes" />
     </key>
@@ -79,6 +82,8 @@
       <workItem from="1602683009779" duration="4326000" />
       <workItem from="1602767179393" duration="9093000" />
       <workItem from="1602865452418" duration="8133000" />
+      <workItem from="1602945222744" duration="15771000" />
+      <workItem from="1602977088598" duration="603000" />
     </task>
     <servers />
   </component>
@@ -106,13 +111,13 @@
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
     <state x="1992" y="367" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602442372465" />
-    <state x="2216" y="356" key="run.anything.popup" timestamp="1602886615007">
+    <state x="2216" y="356" key="run.anything.popup" timestamp="1602963492415">
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
-    <state x="2216" y="356" key="run.anything.popup/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602886615007" />
-    <state x="2283" y="355" width="672" height="678" key="search.everywhere.popup" timestamp="1602180983689">
+    <state x="2216" y="356" key="run.anything.popup/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602963492415" />
+    <state x="2283" y="355" width="672" height="678" key="search.everywhere.popup" timestamp="1602958499064">
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
-    <state x="2283" y="355" width="672" height="678" key="search.everywhere.popup/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602180983689" />
+    <state x="2283" y="355" width="672" height="678" key="search.everywhere.popup/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602958499064" />
   </component>
 </project>

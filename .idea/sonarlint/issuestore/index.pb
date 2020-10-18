@@ -11,3 +11,7 @@ J
 src/utils/average-color.js,e\9\e96198db5747e6cc8c4eefaacd5e79d436993800
 B
 src/routes/game.js,9\6\96d2266f071417d580caa9830ba827658bef516c
+4
+.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+C
+src/utils/config.js,5\7\579d19663a1469584aa72abac553c9b4500cc1ea

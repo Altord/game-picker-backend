@@ -20,14 +20,7 @@ gameRouter.post(`/games/id`, (req,res,next) => {
     },[])
         .then(response =>{
             const dataResponse = response.data
-            const colorResponse =
-                Promise.all(
-                    Array.from({length: 1}, (_, idx) =>
-                        printAverageColor(response.data[idx].cover.url.replace("//", "https://")
-                        )));
-
-
-            return Promise.all([dataResponse,colorResponse])
+            return Promise.all([dataResponse])
 
 
         })
@@ -59,7 +52,7 @@ gameRouter.post(`/games/rec`, (req,res,next) => {
 
         },
 
-        data: `fields age_ratings.*,artworks.url,summary,first_release_date,total_rating,name,aggregated_rating,involved_companies.publisher,involved_companies.developer,involved_companies.company.*,storyline,themes.name,total_rating,videos.video_id,websites.*, screenshots.*, franchises.name,artworks.*,platforms.*,genres.*,cover.*; where ${finalDec} & category !=(1,2,4,5,6,7) & id !=(${req.body.gameName}); limit 20;`
+        data: `fields age_ratings.*,artworks.url,summary,first_release_date,total_rating,name,aggregated_rating,involved_companies.publisher,involved_companies.developer,involved_companies.company.*,storyline,themes.name,total_rating,videos.video_id,websites.*, screenshots.*, franchises.name,artworks.*,platforms.*,genres.*,cover.*; where ${finalDec} & category !=(1,2,4,5,6,7) & id !=(${req.body.gameId}); limit 20;`
     },[])
         .then(response =>{
             const dataResponse = response.data
@@ -76,5 +69,35 @@ gameRouter.post(`/games/rec`, (req,res,next) => {
         });
 })
 
+gameRouter.post(`/games/rec/articles`, (req,res,next) => {
+    res.header("Access-Control-Allow-Origin", "*")
+    console.log(req.body.gameName)
+    axios({
+        url: `http://www.gamespot.com/api/games/?api_key=${config.GS.GSKEY}&format=json&offset=articles_api_url&filter=name:${req.body.gameName},limit:1`,
+        method: 'POST',
+
+
+    },[])
+        .then(response =>{
+
+            /*`http://www.gamespot.com/api/articles/?api_key=${config.GS.GSKEY}&format=json&filter=association%3A5000-458193` */
+            const dataResponse = response.data.results[0].articles_api_url.replace("?",`?&api_key=${config.GS.GSKEY}&format=json&`)
+            return axios.get(dataResponse)
+
+
+        })
+        .then(response=>{
+            console.log(response.data)
+            res.send(response.data)
+        })
+
+        .catch(err => {
+            console.error(err);
+        });
+})
+
+
+
 
 module.exports = gameRouter
+

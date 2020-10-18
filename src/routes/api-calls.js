@@ -14,7 +14,6 @@ const roundedDate60 = Math.round(date60)
 const roundedDate25 = Math.round(date25)
 const roundedDate14 = Math.round(date14)
 const roundedDate1 = Math.round(date1)
-console.log((new Date().setDate(today.getDate()-14)))
 
 //Google trends
 async function trends (keyword){
@@ -158,7 +157,7 @@ apiRouter.post('/api-router-soon', (req,res) =>{
             const uniqueNames = new Set();
             const uniqueGames = response.data.filter(entry => {
                 const {name} = entry.game;
-                if (uniqueNames.has(name)) {
+                if (uniqueNames.has(name) || entry.game.cover === undefined) {
                     return false;
                 }
                 uniqueNames.add(name);
@@ -187,7 +186,7 @@ apiRouter.post('/api-router-soon', (req,res) =>{
         })
 
         .catch(err => {
-            console.error(err);
+            console.error('this is a recent games error ' + err);
         });
 })
 //Search for most anticipated games
@@ -312,5 +311,4 @@ apiRouter.post('/api-router-top100', (req,res) =>{
 
 
 
-console.log("hi")
 module.exports = apiRouter
