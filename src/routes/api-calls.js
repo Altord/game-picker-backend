@@ -27,10 +27,10 @@ async function trends (keyword){
         })
 }
 
-
+//${req.body.searchValue}
 
 //Basic Search function
-apiRouter.post('/api-router-search', (req,res) =>{
+apiRouter.get('/api-router-search', (req,res) =>{
     res.header("Access-Control-Allow-Origin", "*");
     axios({
         url: "https://api.igdb.com/v4/games",
@@ -41,13 +41,13 @@ apiRouter.post('/api-router-search', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields id,name,platforms.*,genres.*,aggregated_rating,cover.*; search "${req.body.searchValue}"; limit 1;`
+        data: `fields *,id,name,platforms.*,genres.*,aggregated_rating,cover.*; search "halo"; limit 2;`
     },[])
         .then(response =>{
             const dataResponse = response.data
             const colorResponse =
                 Promise.all(
-                    Array.from({ length: 7 }, (_, idx) =>
+                    Array.from({ length: 2}, (_, idx) =>
                         printAverageColor(response.data[idx].cover.url.replace("//", "https://")
                         )));
 

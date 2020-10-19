@@ -81,7 +81,7 @@ gameRouter.post(`/games/rec/articles`, (req,res,next) => {
         .then(response =>{
 
             /*`http://www.gamespot.com/api/articles/?api_key=${config.GS.GSKEY}&format=json&filter=association%3A5000-458193` */
-            const dataResponse = response.data.results[0].articles_api_url.replace("?",`?&api_key=${config.GS.GSKEY}&format=json&`)
+            const dataResponse = response.data.results[0].articles_api_url.replace("?",`?&api_key=${config.GS.GSKEY}&format=json&sort=publish_date:desc&`)
             return axios.get(dataResponse)
 
 

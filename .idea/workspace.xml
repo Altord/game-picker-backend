@@ -47,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gamepicker-frontend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -84,6 +84,8 @@
       <workItem from="1602865452418" duration="8133000" />
       <workItem from="1602945222744" duration="15771000" />
       <workItem from="1602977088598" duration="603000" />
+      <workItem from="1603046068609" duration="164000" />
+      <workItem from="1603073844048" duration="914000" />
     </task>
     <servers />
   </component>
@@ -103,10 +105,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2400" y="488" key="FileChooserDialogImpl" timestamp="1602178502675">
+    <state x="2400" y="488" key="FileChooserDialogImpl" timestamp="1603073850791">
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
-    <state x="2400" y="488" key="FileChooserDialogImpl/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1602178502675" />
+    <state x="2400" y="488" key="FileChooserDialogImpl/-2560.0.2560.1440/0.0.3840.2160@0.0.3840.2160" timestamp="1603073850791" />
     <state x="1992" y="367" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602442372465">
       <screen x="0" y="0" width="3840" height="2160" />
     </state>
