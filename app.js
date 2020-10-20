@@ -4,6 +4,7 @@ const path = require('path');
 var cors = require('cors')
 const apiRouter = require('./src/routes/api-calls')
 const gameRouter = require('./src/routes/game')
+const searchRouter = require('./src/routes/general-search')
 const middleware = require('./src/utils/middleware')
 const logger = require('./src/utils/logger')
 
@@ -21,6 +22,7 @@ app.use(cors())
 app.use(middleware.requestLogger)
 app.use(apiRouter)
 app.use(gameRouter)
+app.use(searchRouter)
 //Fallback routing in case entry is unrecognized
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));

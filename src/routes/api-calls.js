@@ -30,41 +30,7 @@ async function trends (keyword){
 //${req.body.searchValue}
 
 //Basic Search function
-apiRouter.get('/api-router-search', (req,res) =>{
-    res.header("Access-Control-Allow-Origin", "*");
-    axios({
-        url: "https://api.igdb.com/v4/games",
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Client-ID': config.IDGB.CD ,
-            'Authorization': `Bearer ${config.IDGB.AT}`,
 
-        },
-        data: `fields *,id,name,platforms.*,genres.*,aggregated_rating,cover.*; search "halo"; limit 2;`
-    },[])
-        .then(response =>{
-            const dataResponse = response.data
-            const colorResponse =
-                Promise.all(
-                    Array.from({ length: 2}, (_, idx) =>
-                        printAverageColor(response.data[idx].cover.url.replace("//", "https://")
-                        )));
-
-
-            return Promise.all([dataResponse,colorResponse])
-
-
-        })
-        .then(color=>{
-            res.send(color)
-        })
-
-        .catch(err => {
-            console.error(err);
-        });
-
-})
 
 //Search results for Popularity/first row of categories on the front page
 apiRouter.post('/api-router-popularity', (req,res) =>{
