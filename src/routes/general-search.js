@@ -6,15 +6,14 @@ const printAverageColor = require("../utils/average-color").printAverageColor;
 
 searchRouter.post('/search', (req,res) =>{
     res.header("Access-Control-Allow-Origin", "*");
-    searchValue = req.body.searchValue.value
-    console.log(searchValue)
+    searchValue = req.body.searchValue
     const searchSpecifications = {
-        game: `fields *; search "${searchValue}"; limit 10;`,
-        companies: `fields *,logo.*; where name ~ "${searchValue}"*; limit 10;`,
-        character: `fields *,mug_shot.*; search "${searchValue}";  limit 10;`,
-        themes: `fields *; where name ~ "${searchValue}"*; limit 10;`,
-        franchise: `fields *; where name ~"${searchValue}"*; limit 10;`,
-        platform: `fields *;  search "${searchValue}";   limit 10;`,
+        game: `fields age_ratings.*,first_release_date,total_rating,name,aggregated_rating,genres.*,cover.*; limit 7; search "${searchValue}";`,
+        companies: `fields *,logo.*; limit 7; where name ~ "${searchValue}"*; `,
+        character: `fields *,mug_shot.*; limit 7; search "${searchValue}"; `,
+        themes: `fields *; limit 7; where name ~ "${searchValue}"*;`,
+        franchise: `fields *; limit 7; where name ~"${searchValue}"*;`,
+        platform: `fields *; limit 7; search "${searchValue}";  `,
     }
     const basicHeaders = {
         'Accept': 'application/json',
@@ -25,7 +24,7 @@ searchRouter.post('/search', (req,res) =>{
 
 
     async function fetchData() {
-        const gamesCall = await axios.post('https://api.igdb.com/v4/search', searchSpecifications.game, {headers: basicHeaders})
+        const gamesCall = await axios.post('https://api.igdb.com/v4/games', searchSpecifications.game, {headers: basicHeaders})
         const companyCall = await axios.post(`https://api.igdb.com/v4/companies`, searchSpecifications.companies, {headers: basicHeaders})
         const characterCall = await axios.post('https://api.igdb.com/v4/characters', searchSpecifications.character, {headers: basicHeaders})
         const themeCall = await axios.post(`https://api.igdb.com/v4/themes`, searchSpecifications.themes, {headers: basicHeaders})
