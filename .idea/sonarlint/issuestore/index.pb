@@ -15,3 +15,11 @@ B
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
 C
 src/utils/config.js,5\7\579d19663a1469584aa72abac553c9b4500cc1ea
+L
+src/routes/general-search.js,b\0\b032c7cfd1b301fcf5dc6e872f6fb6873ac3e38d
+C
+src/utils/logger.js,7\1\713f1ceae968d26671b3f1919e880e627dde6142
+G
+src/utils/middleware.js,d\0\d022b3980598151de0bccd6532863d625808b7b2
+E
+src/routes/company.js,9\0\90e7a3bc1c447251fd375d074dbb4929d0fabc36
