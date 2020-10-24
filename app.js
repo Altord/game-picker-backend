@@ -6,6 +6,7 @@ const apiRouter = require('./src/routes/api-calls')
 const gameRouter = require('./src/routes/game')
 const searchRouter = require('./src/routes/general-search')
 const companyRouter = require('./src/routes/company')
+const browseRouter = require('./src/routes/browse')
 const middleware = require('./src/utils/middleware')
 const logger = require('./src/utils/logger')
 
@@ -25,6 +26,7 @@ app.use(apiRouter)
 app.use(gameRouter)
 app.use(searchRouter)
 app.use(companyRouter)
+app.use(browseRouter)
 //Fallback routing in case entry is unrecognized
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));

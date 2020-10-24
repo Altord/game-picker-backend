@@ -16,7 +16,7 @@ companyRouter.post(`/companies/id`, (req,res,next) => {
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data:`fields *,developed.*,logo.*,parent.*,developed.*,developed.cover.*,developed.genres.name,published.*,published.genres.name,published.cover.*,websites.*; where id = ${req.body.companyId} ;`
+        data:`fields *,developed.*,logo.*,parent.*,developed.*,developed.cover.*,published.screenshots.url,developed.screenshots.url,developed.genres.name,published.*,published.genres.name,published.cover.*,websites.*; where id = ${req.body.companyId} ;`
     },[])
         .then(response =>{
             const dataResponse = response.data
