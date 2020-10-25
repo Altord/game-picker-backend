@@ -13,9 +13,13 @@ let GS = {
     GSKEY: process.env.GSID
 }
 
+let RAWG = {
+    RAWGKEY: process.env.RAWG
+}
 module.exports = {
     PORT,
     IDGB,
-    GS
+    GS,
+    RAWG
 }
 

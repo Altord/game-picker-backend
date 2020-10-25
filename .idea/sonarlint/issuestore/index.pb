@@ -23,3 +23,5 @@ G
 src/utils/middleware.js,d\0\d022b3980598151de0bccd6532863d625808b7b2
 E
 src/routes/company.js,9\0\90e7a3bc1c447251fd375d074dbb4929d0fabc36
+D
+src/routes/browse.js,d\c\dc1bf2d67989cc88606396542fffcb86cd400754
