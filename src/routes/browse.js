@@ -5,7 +5,6 @@ const browseRouter = express.Router()
 
 
 browseRouter.post('/browse',(req,res,next)=>{
-    res.header("Access-Control-Allow-Origin", "*")
     const searchSpecifications = {
         developers: `fields *,logo.*, developed.*, developed.screenshots.*; where developed > 11 & id != (1,5,8,10,11); limit 5; sort id asc;`,
         publishers: `fields *,logo.*, published.*, published.screenshots.*; where published.rating > 11 & id != 4 ; limit 5; sort id asc;`,
@@ -20,7 +19,7 @@ browseRouter.post('/browse',(req,res,next)=>{
 
 
     async function fetchData() {
-        const develeporCall = await axios.post(`https://api.igdb.com/v4/companies`, searchSpecifications.developers, {headers: basicHeaders})
+        const developerCall = await axios.post(`https://api.igdb.com/v4/companies`, searchSpecifications.developers, {headers: basicHeaders})
         const publisherCall = await axios.post(`https://api.igdb.com/v4/companies`, searchSpecifications.publishers, {headers: basicHeaders})
         const genreCall = await axios.get(`https://api.rawg.io/api/genres?key=${config.RAWG.RAWGKEY}`, {headers: {'User-Agent':'Game-Picker'} })
         const platformCall = await axios.get(`https://api.rawg.io/api/platforms?key=${config.RAWG.RAWGKEY}`, {headers: {'User-Agent':'Game-Picker'} })
@@ -79,7 +78,7 @@ browseRouter.post('/browse',(req,res,next)=>{
         let callTotal = []
         callTotal.push({
             platforms: platformArray[0],
-            developers: develeporCall.data,
+            developers: developerCall.data,
             publishers: publisherCall.data,
             genres: genreArray[0],
        })

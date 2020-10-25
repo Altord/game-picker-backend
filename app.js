@@ -29,7 +29,7 @@ app.use(companyRouter)
 app.use(browseRouter)
 //Fallback routing in case entry is unrecognized
 app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    res.sendFile(path.join(__dirname+'/frontend/index.html'));
 });
 
 module.exports = app

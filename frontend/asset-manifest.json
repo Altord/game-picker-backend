@@ -1,22 +1,39 @@
 {
   "files": {
-    "main.css": "/static/css/main.570f5e33.chunk.css",
-    "main.js": "/static/js/main.937e3d15.chunk.js",
-    "main.js.map": "/static/js/main.937e3d15.chunk.js.map",
+    "main.css": "/static/css/main.cf2ec0bd.chunk.css",
+    "main.js": "/static/js/main.01a38797.chunk.js",
+    "main.js.map": "/static/js/main.01a38797.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6cdaf8bf.js",
     "runtime-main.js.map": "/static/js/runtime-main.6cdaf8bf.js.map",
-    "static/js/2.ef47c1e9.chunk.js": "/static/js/2.ef47c1e9.chunk.js",
-    "static/js/2.ef47c1e9.chunk.js.map": "/static/js/2.ef47c1e9.chunk.js.map",
+    "static/css/2.89fcc9a3.chunk.css": "/static/css/2.89fcc9a3.chunk.css",
+    "static/js/2.7900c79c.chunk.js": "/static/js/2.7900c79c.chunk.js",
+    "static/js/2.7900c79c.chunk.js.map": "/static/js/2.7900c79c.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.300e86957e0a4f9390ec6d0f71d6c119.js": "/precache-manifest.300e86957e0a4f9390ec6d0f71d6c119.js",
+    "precache-manifest.3a02df25b24a675f6545a34ef8d5dd55.js": "/precache-manifest.3a02df25b24a675f6545a34ef8d5dd55.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.570f5e33.chunk.css.map": "/static/css/main.570f5e33.chunk.css.map",
-    "static/js/2.ef47c1e9.chunk.js.LICENSE.txt": "/static/js/2.ef47c1e9.chunk.js.LICENSE.txt"
+    "static/css/2.89fcc9a3.chunk.css.map": "/static/css/2.89fcc9a3.chunk.css.map",
+    "static/css/main.cf2ec0bd.chunk.css.map": "/static/css/main.cf2ec0bd.chunk.css.map",
+    "static/js/2.7900c79c.chunk.js.LICENSE.txt": "/static/js/2.7900c79c.chunk.js.LICENSE.txt",
+    "static/media/Reddit-Icon.png": "/static/media/Reddit-Icon.7a140126.png",
+    "static/media/app-store.png": "/static/media/app-store.98c922e3.png",
+    "static/media/discord-seeklogo.com.svg": "/static/media/discord-seeklogo.com.fee2b0c7.svg",
+    "static/media/epicgames_logo.png": "/static/media/epicgames_logo.6a0c24ac.png",
+    "static/media/facebook-icon.svg": "/static/media/facebook-icon.6fddeffd.svg",
+    "static/media/gamepad.png": "/static/media/gamepad.12cd9e5e.png",
+    "static/media/gog_logo.jpg": "/static/media/gog_logo.9a9fd63a.jpg",
+    "static/media/google-play.png": "/static/media/google-play.8412cc2c.png",
+    "static/media/instagram.png": "/static/media/instagram.4a8c2347.png",
+    "static/media/itchio_logo.png": "/static/media/itchio_logo.1ffd1731.png",
+    "static/media/moustache.png": "/static/media/moustache.655662e8.png",
+    "static/media/slick-theme.css": "/static/media/slick.f97e3bbf.svg",
+    "static/media/twitter.png": "/static/media/twitter.8f35a404.png",
+    "static/media/wikia_logo.png": "/static/media/wikia_logo.f068fc4d.png"
   },
   "entrypoints": [
     "static/js/runtime-main.6cdaf8bf.js",
-    "static/js/2.ef47c1e9.chunk.js",
-    "static/css/main.570f5e33.chunk.css",
-    "static/js/main.937e3d15.chunk.js"
+    "static/css/2.89fcc9a3.chunk.css",
+    "static/js/2.7900c79c.chunk.js",
+    "static/css/main.cf2ec0bd.chunk.css",
+    "static/js/main.01a38797.chunk.js"
   ]
 }

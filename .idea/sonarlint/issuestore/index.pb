@@ -25,3 +25,5 @@ E
 src/routes/company.js,9\0\90e7a3bc1c447251fd375d074dbb4929d0fabc36
 D
 src/routes/browse.js,d\c\dc1bf2d67989cc88606396542fffcb86cd400754
+<
+package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
