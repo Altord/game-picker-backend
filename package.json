@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "build:ui": "rm -rf frontend && cd ../gamepicker-frontend && npm run build --prod && cp -r build ../gamepicker-backend/frontend/",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -31,5 +33,8 @@
     "eslint": "^7.10.0",
     "nodemon": "^2.0.4",
     "supertest": "^5.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+/*const mongoose = require('mongoose')
 
 const gameStatusSchema = new mongoose.Schema({
     content: {type: String,},
@@ -17,4 +17,4 @@ gameStatusSchema.set('toJSON', {
     }
 })
 
-module.exports = mongoose.model('Note', gameStatusSchema)
+module.exports = mongoose.model('Note', gameStatusSchema)*/
