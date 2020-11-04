@@ -81,10 +81,11 @@ apiRouter.post('/api-router-trending', (req,res) =>{
             'Authorization': `Bearer ${config.IDGB.AT}`,
 
         },
-        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate14}; limit: 20;`
+        data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where  cover.url != null & first_release_date > ${roundedDate14}; limit: 20;`
     })
         .then(response =>{
             const dataResponse = response.data
+            console.log(dataResponse.length)
             const colorResponse =
                 Promise.all(
                     Array.from({ length: 7 }, (_, idx) =>
@@ -208,10 +209,6 @@ apiRouter.get('/test', (req,res) =>{
         data: `fields name,hypes,aggregated_rating,genres.*,cover.*,collection,summary,platforms.*; where first_release_date > ${roundedDate14}; limit: 7;`
     })
         .then(response =>{
-           /* const colorResponse =
-                Promise.all(Array.from({ length: 7 }, (_, idx) =>
-                        printAverageColor(response[idx].game.cover.url.replace("//", "https://")
-                ))); */
              const trendResponse =
                 Promise.all(Array.from({ length: 7 }, (_, idx) => (
                     googleTrends.interestOverTime({keyword: `${response.data[idx].name}`, startTime: (new Date(+new Date - 12096e5))})

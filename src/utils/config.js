@@ -3,6 +3,8 @@ require('dotenv').config()
 // Setting PORT and MONGODB for other applications
 let PORT = process.env.PORT
 
+const MONGODB_URI = process.env.MONGODB_URI
+
 let IDGB = {
     CD: process.env.CID ,
     CS: process.env.CSEC,
@@ -20,6 +22,8 @@ module.exports = {
     PORT,
     IDGB,
     GS,
-    RAWG
+    RAWG,
+    MONGODB_URI,
+    secretOrKey: "secret"
 }
 

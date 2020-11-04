@@ -76,12 +76,7 @@ gameRouter.post(`/games/rec`, (req,res,next) => {
 
 gameRouter.post(`/games/rec/articles`, (req,res,next) => {
     res.header("Access-Control-Allow-Origin", "*")
-    axios({
-        url: `http://www.gamespot.com/api/games/?api_key=${config.GS.GSKEY}&format=json&filter=name:${req.body.gameName},limit:1`,
-        method: 'POST',
-
-
-    },[])
+    axios.post(`http://www.gamespot.com/api/games/?api_key=${config.GS.GSKEY}&format=json&filter=name:${req.body.gameName},limit:1`, {headers: {'User-Agent':'Game-Picker'} })
         .then(response =>{
            let data = response.data.results[0]
             if (data === undefined) {
