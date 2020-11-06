@@ -6,7 +6,6 @@ const companyRouter = express.Router()
 
 companyRouter.post(`/companies/id`, (req,res,next) => {
     res.header("Access-Control-Allow-Origin", "*")
-    console.log(req.body)
     axios({
         url: "https://api.igdb.com/v4/companies/",
         method: 'POST',

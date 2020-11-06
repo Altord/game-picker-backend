@@ -8,10 +8,12 @@ gameStatusRouter.post('/users/games/status', (req,res,next)=>{
     gameFinal.status = req.body.status
     const newGame = new Game({
         gameTitle: gameFinal.gameTitle,
+        gameCover: gameFinal.gameCover,
         gameId: gameFinal.gameId,
         score: gameFinal.score,
         status: gameFinal.status
     })
+    console.log(newGame)
     User.find({_id:req.body.userData.id, games:{$elemMatch: {gameId:gameFinal.gameId}}}).then(user=> {
 
         if (user[0] === undefined){
@@ -37,7 +39,6 @@ gameStatusRouter.post('/users/games/status', (req,res,next)=>{
                 })    
             })
         }else{
-            console.log('Game Status Updated')
             User.updateOne({_id:req.body.userData.id, games:{$elemMatch: {gameId:gameFinal.gameId}}}, {$set: {"games.$.status":gameFinal.status}}).then(gameUpdate=>{
                 const finalGames = user[0].games
                 const payload = {

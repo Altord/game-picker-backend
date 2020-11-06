@@ -44,7 +44,6 @@ gameRouter.post(`/games/rec`, (req,res,next) => {
         let finalGenre = mappedGenre[Math.floor(Math.random() * mappedGenre.length)]
         let finalTheme = mappedTheme[Math.floor(Math.random() * mappedTheme.length)]
         let finalDec = req.body.themes === undefined ? `genres = (${finalGenre})`  : `themes =(${finalTheme}) & genres = (${finalGenre})`
-        console.log(finalGenre, finalTheme)
         axios({
             url: "https://api.igdb.com/v4/games/",
             method: 'POST',
