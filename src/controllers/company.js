@@ -3,7 +3,7 @@ const express = require('express')
 const axios = require('axios')
 const companyRouter = express.Router()
 
-
+//Call for the company page
 companyRouter.post(`/companies/id`, (req,res,next) => {
     res.header("Access-Control-Allow-Origin", "*")
     axios({

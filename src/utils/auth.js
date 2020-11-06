@@ -7,7 +7,7 @@ const auth = (req, res, next) => {
             return res
                 .status(401)
                 .json({ msg: "No authentication token, authorization denied." });
-
+        //Very the token and then send error if not
         const verified = jwt.verify(token, process.env.JWT_SECRET);
         if (!verified)
             return res
