@@ -30,7 +30,7 @@ This part can be run by itself, the front end requires this backend or connectin
 3. Use npm run dev
 
 ## Built with 
-* Node.js - as the server
+* Node.js - as the runtime
 * MongoDB - as the database
 * Express - as the middleware
 * dotenv - for config files
@@ -38,6 +38,7 @@ This part can be run by itself, the front end requires this backend or connectin
 * jwtToken+Auth - for authorization
 ## What needs to be done
 * Proper commenting
-* Clean and sanitize the code
+* Clean and organize the code
 * **Fix browse**, it's slow as hell because of the async function in the backend
 * Switch authorization methods, backend JWT is NOT secure
+* Fix guest log in - cors error
