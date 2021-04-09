@@ -1,6 +1,6 @@
 # Game Picker 
 
-Front end portion of app that utilizes react, scss and react-router. 
+Backend portion of app that utilizes react, scss and react-router. 
 
 Multiple other libraries are used but mostly for aesthetic purposes.
 
