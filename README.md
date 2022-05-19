@@ -37,6 +37,7 @@ This part can be run by itself, the front end requires this backend or connectin
 * passPortJS - for authorization
 * jwtToken+Auth - for authorization
 ## What needs to be done
+* **Fix changes resulting from IGDB update from v3 to v4 (such as popularity and top games)**
 * Proper commenting
 * Clean and organize the code
 * **Fix browse**, it's slow as hell because of the async function in the backend
